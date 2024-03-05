@@ -1,0 +1,173 @@
+/////////A) DDL\\\\\\\\\
+
+////////// 1 \\\\\\\\\\\
+mysql>create table Employee(Emp_no int,E_name varchar(50),E_ph_no varchar(15),Dept_name varchar(60),job_id int,salary int);
+Query OK, 0 rows affected (1.40 sec)
+
+mysql>create table Department(Dept_no int,Emp_no int,Emp_name varchar(30));
+Query OK, 0 rows affected (0.61 sec)
+
+mysql>insert into Employee values(1,"Akash",123456789,"HR",1,18000);
+Query OK, 1 row affected (0.12 sec)
+
+mysql>insert into Department values(1,1,"Akash");
+Query OK, 1 row affected (0.25 sec)
+
+
+////////// 2 \\\\\\\\\\\
+mysql> alter table Employee add column HIRE_DATE date;
+Query OK, 0 rows affected (0.66 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc Employee;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| Emp_no    | int         | YES  |     | NULL    |       |
+| E_name    | varchar(50) | YES  |     | NULL    |       |
+| E_ph_no   | varchar(15) | YES  |     | NULL    |       |
+| Dept_name | varchar(60) | YES  |     | NULL    |       |
+| job_id    | int         | YES  |     | NULL    |       |
+| salary    | int         | YES  |     | NULL    |       |
+| HIRE_DATE | date        | YES  |     | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+7 rows in set (0.01 sec)
+
+
+////////// 3 \\\\\\\\\\\
+mysql> alter table Employee modify column job_id varchar(5);
+Query OK, 1 row affected (2.30 sec)
+Records: 1  Duplicates: 0  Warnings: 0
+
+mysql> desc Employee;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| Emp_no    | int         | YES  |     | NULL    |       |
+| E_name    | varchar(50) | YES  |     | NULL    |       |
+| E_ph_no   | varchar(15) | YES  |     | NULL    |       |
+| Dept_name | varchar(60) | YES  |     | NULL    |       |
+| job_id    | varchar(5)  | YES  |     | NULL    |       |
+| salary    | int         | YES  |     | NULL    |       |
+| HIRE_DATE | date        | YES  |     | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+7 rows in set (0.01 sec)
+
+
+////////// 4 \\\\\\\\\\\
+mysql> alter table Employee rename column Emp_no to E_no ;
+Query OK, 0 rows affected (0.79 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc Employee;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| E_no      | int         | YES  |     | NULL    |       |
+| E_name    | varchar(50) | YES  |     | NULL    |       |
+| E_ph_no   | varchar(15) | YES  |     | NULL    |       |
+| Dept_name | varchar(60) | YES  |     | NULL    |       |
+| job_id    | varchar(5)  | YES  |     | NULL    |       |
+| salary    | int         | YES  |     | NULL    |       |
+| HIRE_DATE | date        | YES  |     | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+7 rows in set (0.00 sec)
+
+
+////////// 5 \\\\\\\\\\\
+mysql> alter table Employee modify column job_id varchar(15);
+Query OK, 0 rows affected (0.19 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc Employee job_id;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| job_id | varchar(15) | YES  |     | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+1 row in set (0.03 sec)
+
+
+////////// 6 \\\\\\\\\\\
+mysql> alter table Employee modify E_no int not null,modify E_name varchar(50) not null,modify E_ph_no varchar(15) not null unique,modify Dept_name varchar(60) not null,modify job_id varchar(15) not null, modify salary int not null,modify HIRE_DATE date not null, add primary key(E_no);
+Query OK, 0 rows affected (1.71 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table Department modify Dept_no int not null,modify Emp_no int not null,modify Emp_name varchar(50) not null, add primary key(Dept_no),add constraint fk_emp foreign key (Emp_no) references Employee(E_no);
+Query OK, 1 row affected (1.90 sec)
+Records: 1  Duplicates: 0  Warnings: 0
+
+mysql> desc Employee;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| E_no      | int         | NO   | PRI | NULL    |       |
+| E_name    | varchar(50) | NO   |     | NULL    |       |
+| E_ph_no   | varchar(15) | NO   | UNI | NULL    |       |
+| Dept_name | varchar(60) | NO   |     | NULL    |       |
+| job_id    | varchar(15) | NO   |     | NULL    |       |
+| salary    | int         | NO   |     | NULL    |       |
+| HIRE_DATE | date        | NO   |     | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+7 rows in set (0.01 sec)
+
+mysql> desc Department;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| Dept_no  | int         | NO   | PRI | NULL    |       |
+| Emp_no   | int         | NO   | MUL | NULL    |       |
+| Emp_name | varchar(50) | NO   |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+
+////////// 7 \\\\\\\\\\\
+mysql> alter table Employee drop column HIRE_DATE;
+Query OK, 0 rows affected (0.57 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc Employee;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| E_no      | int         | NO   | PRI | NULL    |       |
+| E_name    | varchar(50) | NO   |     | NULL    |       |
+| E_ph_no   | varchar(15) | NO   | UNI | NULL    |       |
+| Dept_name | varchar(60) | NO   |     | NULL    |       |
+| job_id    | varchar(15) | NO   |     | NULL    |       |
+| salary    | int         | NO   |     | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+6 rows in set (0.01 sec)
+
+
+////////// 8 \\\\\\\\\\\
+mysql> rename TABLE Employee to EMP;
+Query OK, 0 rows affected (0.97 sec)
+
+mysql> SHOW TABLES;
++--------------------+
+| Tables_in_mangalam |
++--------------------+
+| department         |
+| emp                |
++--------------------+
+2 rows in set (0.00 sec)
+
+////////// 9 \\\\\\\\\\\
+mysql> truncate table department;
+Query OK, 0 rows affected (1.95 sec)
+
+mysql> select * from department;
+Empty set (0.00 sec)
+
+mysql> drop table department;
+Query OK, 0 rows affected (0.41 sec)
+
+mysql> SHOW TABLES;
++--------------------+
+| Tables_in_mangalam |
++--------------------+
+| emp                |
++--------------------+
+1 row in set (0.00 sec)

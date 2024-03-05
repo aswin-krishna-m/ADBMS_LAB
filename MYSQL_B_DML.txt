@@ -1,0 +1,146 @@
+/////////B) DML\\\\\\\\\
+
+mysql> create table Employee(Emp_no int primary key,Emp_name varchar(50),Dept_name varchar(60) not null,salary int not null);
+Query OK, 0 rows affected (0.84 sec)
+
+mysql> create table Department(Dept_no int primary key,Emp_no int not null,Emp_name varchar(30) not null,foreign key(Emp_no) references Employee(Emp_no));
+Query OK, 0 rows affected (0.70 sec)
+
+
+////////// 1 \\\\\\\\\\\
+
+mysql> INSERT INTO EMPLOYEE values(201,"Ananthu","R&D",10000),(202,"Ajay","QA",13000),(203,"Raju","Sales",15000),(204,"Visal","HR",10000),(205,"Shahul","IT",20000);
+Query OK, 5 rows affected (0.16 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> INSERT INTO DEPARTMENT values(1,201,"Ananthu"),(2,202,"Ajay"),(3,203,"Raju"),(4,204,"Visal"),(5,205,"Shahul");
+Query OK, 5 rows affected (0.07 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> select * from employee;
++--------+----------+-----------+--------+
+| Emp_no | Emp_name | Dept_name | salary |
++--------+----------+-----------+--------+
+|    201 | Ananthu  | R&D       |  10000 |
+|    202 | Ajay     | QA        |  13000 |
+|    203 | Raju     | Sales     |  15000 |
+|    204 | Visal    | HR        |  10000 |
+|    205 | Shahul   | IT        |  20000 |
++--------+----------+-----------+--------+
+5 rows in set (0.00 sec)
+
+mysql> select * from department;
++---------+--------+----------+
+| Dept_no | Emp_no | Emp_name |
++---------+--------+----------+
+|       1 |    201 | Ananthu  |
+|       2 |    202 | Ajay     |
+|       3 |    203 | Raju     |
+|       4 |    204 | Visal    |
+|       5 |    205 | Shahul   |
++---------+--------+----------+
+5 rows in set (0.00 sec)
+
+
+////////// 2 \\\\\\\\\\\
+mysql> update employee set Emp_name='Sabu' where Emp_no =202;
+Query OK, 1 row affected (0.12 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+mysql> select * from employee;
++--------+----------+-----------+--------+
+| Emp_no | Emp_name | Dept_name | salary |
++--------+----------+-----------+--------+
+|    201 | Ananthu  | R&D       |  10000 |
+|    202 | Sabu     | QA        |  13000 |
+|    203 | Raju     | Sales     |  15000 |
+|    204 | Visal    | HR        |  10000 |
+|    205 | Shahul   | IT        |  20000 |
++--------+----------+-----------+--------+
+5 rows in set (0.00 sec)
+
+
+////////// 3 \\\\\\\\\\\
+mysql> delete from department where Emp_name='Raju';
+Query OK, 1 row affected (0.08 sec)
+
+mysql> select * from department;
++---------+--------+----------+
+| Dept_no | Emp_no | Emp_name |
++---------+--------+----------+
+|       1 |    201 | Ananthu  |
+|       2 |    202 | Ajay     |
+|       4 |    204 | Visal    |
+|       5 |    205 | Shahul   |
++---------+--------+----------+
+4 rows in set (0.00 sec)
+
+
+////////// 4 \\\\\\\\\\\
+mysql> select department.Emp_no,employee.salary from department inner join Employee on department.Emp_no=employee.Emp_no;
++--------+--------+
+| Emp_no | salary |
++--------+--------+
+|    201 |  10000 |
+|    202 |  13000 |
+|    204 |  10000 |
+|    205 |  20000 |
++--------+--------+
+4 rows in set (0.00 sec)
+
+
+////////// 5 \\\\\\\\\\\
+mysql> select Emp_name as ename,salary as sal from employee;
++---------+-------+
+| ename   | sal   |
++---------+-------+
+| Ananthu | 10000 |
+| Sabu    | 13000 |
+| Raju    | 16000 |
+| Visal   | 10000 |
+| Shahul  | 20000 |
++---------+-------+
+5 rows in set (0.00 sec)
+
+
+////////// 6 \\\\\\\\\\\
+mysql> INSERT INTO employee values(202,"Saju","Sales",NULL);
+ERROR 1048 (23000): Column 'salary' cannot be null
+mysql> INSERT INTO employee values(202,"Saju","Sales",10000);
+ERROR 1062 (23000): Duplicate entry '202' for key 'employee.PRIMARY'
+
+
+////////// 7 \\\\\\\\\\\
+mysql> select emp_name from employee where Emp_no=204;
++----------+
+| emp_name |
++----------+
+| Visal    |
++----------+
+
+
+////////// 8 \\\\\\\\\\\
+mysql> select Emp_name,salary from employee where salary=10000;
++----------+--------+
+| Emp_name | salary |
++----------+--------+
+| Ananthu  |  10000 |
+| Visal    |  10000 |
++----------+--------+
+2 rows in set (0.00 sec)
+
+////////// 9 \\\\\\\\\\\
+mysql> update employee set salary=50000 where emp_no=205;
+Query OK, 1 row affected (0.17 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from employee;
++--------+----------+-----------+--------+
+| Emp_no | Emp_name | Dept_name | salary |
++--------+----------+-----------+--------+
+|    201 | Ananthu  | R&D       |  10000 |
+|    202 | Sabu     | QA        |  13000 |
+|    203 | Raju     | Sales     |  16000 |
+|    204 | Visal    | HR        |  10000 |
+|    205 | Shahul   | IT        |  50000 |
++--------+----------+-----------+--------+
+5 rows in set (0.00 sec)

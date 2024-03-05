@@ -1,0 +1,63 @@
+/////////C) DCL\\\\\\\\\
+
+////////// 1 \\\\\\\\\\\
+mysql> create user 'nuser'@'localhost' identified by '1234';
+Query OK, 0 rows affected (0.17 sec)
+
+mysql> select user from mysql.user where user='nuser';
++-------+
+| user  |
++-------+
+| nuser |
++-------+
+1 row in set (0.00 sec)
+
+
+////////// 2 \\\\\\\\\\\
+
+mysql> grant all privileges on mangalam.department to 'nuser'@'localhost';
+Query OK, 0 rows affected (0.17 sec)
+
+mysql> show grants for 'nuser'@'localhost';
++------------------------------------------------------------------------+
+| Grants for nuser@localhost                                             |
++------------------------------------------------------------------------+
+| GRANT USAGE ON *.* TO `nuser`@`localhost`                              |
+| GRANT ALL PRIVILEGES ON `mangalam`.`department` TO `nuser`@`localhost` |
++------------------------------------------------------------------------+
+2 rows in set (0.00 sec)
+
+mysql> revoke all privileges on mangalam.department from 'nuser'@'localhost';
+Query OK, 0 rows affected (0.10 sec)
+
+mysql> show grants for 'nuser'@'localhost';
++-------------------------------------------+
+| Grants for nuser@localhost                |
++-------------------------------------------+
+| GRANT USAGE ON *.* TO `nuser`@`localhost` |
++-------------------------------------------+
+1 row in set (0.00 sec)
+
+
+////////// 3 \\\\\\\\\\\
+mysql> grant insert,update on *.* to 'nuser'@'localhost';
+Query OK, 0 rows affected (0.17 sec)
+
+mysql> show grants for 'nuser'@'localhost';
++----------------------------------------------------+
+| Grants for nuser@localhost                         |
++----------------------------------------------------+
+| GRANT INSERT, UPDATE ON *.* TO `nuser`@`localhost` |
++----------------------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> revoke update on *.* from 'nuser'@'localhost';
+Query OK, 0 rows affected (0.13 sec)
+
+mysql> show grants for 'nuser'@'localhost';
++--------------------------------------------+
+| Grants for nuser@localhost                 |
++--------------------------------------------+
+| GRANT INSERT ON *.* TO `nuser`@`localhost` |
++--------------------------------------------+
+1 row in set (0.00 sec)

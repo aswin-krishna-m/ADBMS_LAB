@@ -1,0 +1,68 @@
+/////////C) TCL\\\\\\\\\
+
+////////// 1 \\\\\\\\\\\
+
+mysql> start transaction;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> savepoint A;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> select * from employee;
++--------+----------+-----------+--------+
+| Emp_no | Emp_name | Dept_name | salary |
++--------+----------+-----------+--------+
+|    201 | Ananthu  | R&D       |  10000 |
+|    202 | Sabu     | QA        |  13000 |
+|    203 | Raju     | Sales     |  16000 |
+|    204 | Visal    | HR        |  10000 |
+|    205 | Shahul   | IT        |  50000 |
++--------+----------+-----------+--------+
+5 rows in set (0.00 sec)
+
+mysql> insert into employee values(6,"Alvin","Arts",30000),(7,"Bibin","Studies",40000),(8,"Gibin","Runs",13000);
+Query OK, 3 rows affected (0.00 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> savepoint B;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> select * from employee;
++--------+----------+-----------+--------+
+| Emp_no | Emp_name | Dept_name | salary |
++--------+----------+-----------+--------+
+|      6 | Alvin    | Arts      |  30000 |
+|      7 | Bibin    | Studies   |  40000 |
+|      8 | Gibin    | Runs      |  13000 |
+|    201 | Ananthu  | R&D       |  10000 |
+|    202 | Sabu     | QA        |  13000 |
+|    203 | Raju     | Sales     |  16000 |
+|    204 | Visal    | HR        |  10000 |
+|    205 | Shahul   | IT        |  50000 |
++--------+----------+-----------+--------+
+8 rows in set (0.00 sec)
+
+mysql> rollback to A;
+Query OK, 0 rows affected (0.12 sec)
+
+mysql> select * from employee;
++--------+----------+-----------+--------+
+| Emp_no | Emp_name | Dept_name | salary |
++--------+----------+-----------+--------+
+|    201 | Ananthu  | R&D       |  10000 |
+|    202 | Sabu     | QA        |  13000 |
+|    203 | Raju     | Sales     |  16000 |
+|    204 | Visal    | HR        |  10000 |
+|    205 | Shahul   | IT        |  50000 |
++--------+----------+-----------+--------+
+5 rows in set (0.00 sec)
+
+
+////////// 2 \\\\\\\\\\\
+mysql> commit;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> rollback to A;
+ERROR 1305 (42000): SAVEPOINT A does not exist
+mysql> rollback to B;
+ERROR 1305 (42000): SAVEPOINT B does not exist

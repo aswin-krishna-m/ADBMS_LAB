@@ -1,0 +1,146 @@
+/////////H)\\\\\\\\\
+
+mysql> CREATE TABLE Manager (mid INT PRIMARY KEY,mname VARCHAR(255),msal INT);
+Query OK, 0 rows affected (0.74 sec)
+
+mysql> INSERT INTO Manager VALUES (1, 'Alan', 55000), (2, 'Jane', 59000), (3, 'Mary', 56000);
+Query OK, 3 rows affected (0.08 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> select * from Manager;
++-----+-------+-------+
+| mid | mname | msal  |
++-----+-------+-------+
+|   1 | Alan  | 55000 |
+|   2 | Jane  | 59000 |
+|   3 | Mary  | 56000 |
++-----+-------+-------+
+3 rows in set (0.00 sec)
+
+
+////////// a) \\\\\\\\\\\
+
+mysql> SELECT ename,sal,mgr,msal FROM Emp1 JOIN Manager ON Emp1.mgr = Manager.mname WHERE sal > msal;
++--------+-------+------+-------+
+| ename  | sal   | mgr  | msal  |
++--------+-------+------+-------+
+| Chris  | 56350 | Mary | 56000 |
+| Mathew | 59800 | Jane | 59000 |
++--------+-------+------+-------+
+2 rows in set (0.08 sec)
+
+
+////////// b) \\\\\\\\\\\
+
+mysql>  SELECT ename, sal, deptno FROM Emp1 WHERE (sal, deptno) IN (SELECT MAX(sal), deptno FROM Emp1 GROUP BY deptno);
++--------+-------+--------+
+| ename  | sal   | deptno |
++--------+-------+--------+
+| John   | 51750 |      1 |
+| Chris  | 56350 |      3 |
+| Mathew | 59800 |      2 |
++--------+-------+--------+
+3 rows in set (0.00 sec)
+
+
+////////// c) \\\\\\\\\\\
+
+mysql> SELECT ename, loc FROM Emp1 JOIN Dept ON Emp1.deptno = Dept.deptno where loc ="UAE";
++--------+------+
+| ename  | loc  |
++--------+------+
+| Robie  | UAE  |
+| Mathew | UAE  |
++--------+------+
+2 rows in set (0.00 sec)
+
+
+
+////////// d) \\\\\\\\\\\
+
+mysql> SELECT ename, sal, deptno FROM Emp1 WHERE sal = (SELECT MIN(sal) FROM Emp1);
++-------+-------+--------+
+| ename | sal   | deptno |
++-------+-------+--------+
+| John  | 51750 |      1 |
++-------+-------+--------+
+1 row in set (0.00 sec)
+
+
+////////// e) \\\\\\\\\\\
+
+mysql> SELECT d.deptno , d.dname FROM Dept d LEFT JOIN Emp1 e ON d.deptno = e.deptno WHERE e.empno IS NULL;
++--------+----------+
+| deptno | dname    |
++--------+----------+
+|      4 | Delivery |
++--------+----------+
+1 row in set (0.00 sec)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

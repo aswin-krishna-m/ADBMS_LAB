@@ -1,0 +1,146 @@
+/////////G)\\\\\\\\\
+
+mysql> CREATE TABLE Dept (deptno INT PRIMARY KEY,dname VARCHAR(255),loc VARCHAR(255));
+Query OK, 0 rows affected (0.49 sec)
+
+mysql> INSERT INTO Dept values(1,"Counselling","USA"),(2,"Sales","UAE"),(3,"Executive","UK"),(4,"Delivery","Japan");
+Query OK, 4 rows affected (0.16 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+mysql>  select * from Dept;
++--------+-------------+-------+
+| deptno | dname       | loc   |
++--------+-------------+-------+
+|      1 | Counselling | USA   |
+|      2 | Sales       | UAE   |
+|      3 | Executive   | UK    |
+|      4 | Delivery    | Japan |
++--------+-------------+-------+
+4 rows in set (0.00 sec)
+
+mysql> CREATE TABLE Emp1 (empno INT PRIMARY KEY,ename VARCHAR(255),job VARCHAR(255),mgr VARCHAR(255),hiredate DATE, sal INT,comm INT,deptno INT);
+Query OK, 0 rows affected (1.03 sec)
+
+mysql> INSERT INTO Emp1 VALUES(1, 'John', 'Counselor','Alan', '1997-11-10', 45000, 2000, 1),(2, 'Will', 'Salesman','Jane', '1987-01-15', 50000, 5000, 2),(3, 'Chris', 'Executive','Mary', '1999-11-19', 49000, 6000, 3),(4, 'Robie', 'Salesman','Jane', '2001-06-12', 49000, 8000, 2),(5, 'Mathew', 'Sales Manager','Jane', '1995-01-15', 52000, 5500, 2);
+Query OK, 5 rows affected (0.11 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> select * from Emp1;
++-------+--------+---------------+------+------------+-------+------+--------+
+| empno | ename  | job           | mgr  | hiredate   | sal   | comm | deptno |
++-------+--------+---------------+------+------------+-------+------+--------+
+|     1 | John   | Counselor     | Alan | 1997-11-10 | 45000 | 2000 |      1 |
+|     2 | Will   | Salesman      | Jane | 1987-01-15 | 50000 | 5000 |      2 |
+|     3 | Chris  | Executive     | Mary | 1999-11-19 | 49000 | 6000 |      3 |
+|     4 | Robie  | Salesman      | Jane | 2001-06-12 | 49000 | 8000 |      2 |
+|     5 | Mathew | Sales Manager | Jane | 1995-01-15 | 52000 | 5500 |      2 |
++-------+--------+---------------+------+------------+-------+------+--------+
+5 rows in set (0.00 sec)
+
+
+////////// a) \\\\\\\\\\\
+
+mysql> UPDATE Emp1 SET sal = sal * 1.15 WHERE DATEDIFF(CURDATE(), hiredate) > 3650;
+Query OK, 5 rows affected (0.21 sec)
+Rows matched: 5  Changed: 5  Warnings: 0
+
+mysql> select * from Emp1;
++-------+--------+---------------+------+------------+-------+------+--------+
+| empno | ename  | job           | mgr  | hiredate   | sal   | comm | deptno |
++-------+--------+---------------+------+------------+-------+------+--------+
+|     1 | John   | Counselor     | Alan | 1997-11-10 | 51750 | 2000 |      1 |
+|     2 | Will   | Salesman      | Jane | 1987-01-15 | 57500 | 5000 |      2 |
+|     3 | Chris  | Executive     | Mary | 1999-11-19 | 56350 | 6000 |      3 |
+|     4 | Robie  | Salesman      | Jane | 2001-06-12 | 56350 | 8000 |      2 |
+|     5 | Mathew | Sales Manager | Jane | 1995-01-15 | 59800 | 5500 |      2 |
++-------+--------+---------------+------+------------+-------+------+--------+
+5 rows in set (0.00 sec)
+
+
+////////// b) \\\\\\\\\\\
+
+mysql> DELETE FROM Emp1 WHERE DATEDIFF(CURDATE(), hiredate) >= 10950;
+Query OK, 1 row affected (0.17 sec)
+
+mysql> select * from Emp1;
++-------+--------+---------------+------+------------+-------+------+--------+
+| empno | ename  | job           | mgr  | hiredate   | sal   | comm | deptno |
++-------+--------+---------------+------+------------+-------+------+--------+
+|     1 | John   | Counselor     | Alan | 1997-11-10 | 51750 | 2000 |      1 |
+|     3 | Chris  | Executive     | Mary | 1999-11-19 | 56350 | 6000 |      3 |
+|     4 | Robie  | Salesman      | Jane | 2001-06-12 | 56350 | 8000 |      2 |
+|     5 | Mathew | Sales Manager | Jane | 1995-01-15 | 59800 | 5500 |      2 |
++-------+--------+---------------+------+------------+-------+------+--------+
+4 rows in set (0.00 sec)
+
+
+////////// c) \\\\\\\\\\\
+
+mysql> SELECT mgr, COUNT(empno) AS EMPCNT FROM Emp1 GROUP BY mgr ORDER BY EMPCNT DESC;
++------+--------+
+| mgr  | EMPCNT |
++------+--------+
+| Jane |      2 |
+| Alan |      1 |
+| Mary |      1 |
++------+--------+
+3 rows in set (0.00 sec)
+
+
+////////// d) \\\\\\\\\\\
+
+mysql> CREATE VIEW EmpMgrView AS SELECT ename,mgr from Emp1;
+Query OK, 0 rows affected (0.21 sec)
+
+mysql> select * from EmpMgrView;
++--------+------+
+| ename  | mgr  |
++--------+------+
+| John   | Alan |
+| Chris  | Mary |
+| Robie  | Jane |
+| Mathew | Jane |
++--------+------+
+4 rows in set (0.02 sec)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

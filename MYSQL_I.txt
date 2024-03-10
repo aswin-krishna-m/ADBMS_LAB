@@ -1,0 +1,108 @@
+/////////I)\\\\\\\\\
+
+////////// a) \\\\\\\\\\\
+
+mysql>  SELECT empno,ename,job,hiredate,sal,d.deptno,dname FROM Emp1 e JOIN Dept d ON e.deptno = d.deptno;
++-------+--------+---------------+------------+-------+--------+-------------+
+| empno | ename  | job           | hiredate   | sal   | deptno | dname       |
++-------+--------+---------------+------------+-------+--------+-------------+
+|     1 | John   | Counselor     | 1997-11-10 | 51750 |      1 | Counselling |
+|     3 | Chris  | Executive     | 1999-11-19 | 56350 |      3 | Executive   |
+|     4 | Robie  | Salesman      | 2001-06-12 | 56350 |      2 | Sales       |
+|     5 | Mathew | Sales Manager | 1995-01-15 | 59800 |      2 | Sales       |
++-------+--------+---------------+------------+-------+--------+-------------+
+4 rows in set (0.00 sec)
+
+
+////////// b) \\\\\\\\\\\
+
+mysql> SELECT e.ename ,d.dname FROM Emp1 e LEFT JOIN Dept d ON e.deptno = d.deptno;
++--------+-------------+
+| ename  | dname       |
++--------+-------------+
+| John   | Counselling |
+| Chris  | Executive   |
+| Robie  | Sales       |
+| Mathew | Sales       |
++--------+-------------+
+4 rows in set (0.00 sec)
+
+
+////////// c) \\\\\\\\\\\
+
+mysql> SELECT e.ename ,d.dname FROM Emp1 e RIGHT JOIN Dept d ON e.deptno = d.deptno;
++--------+-------------+
+| ename  | dname       |
++--------+-------------+
+| John   | Counselling |
+| Mathew | Sales       |
+| Robie  | Sales       |
+| Chris  | Executive   |
+| NULL   | Delivery    |
++--------+-------------+
+5 rows in set (0.00 sec)
+
+
+////////// d) \\\\\\\\\\\
+
+mysql> SELECT ename,job,hiredate,sal,deptno FROM Emp1 WHERE sal > (SELECT AVG(sal) FROM Emp1);
++--------+---------------+------------+-------+--------+
+| ename  | job           | hiredate   | sal   | deptno |
++--------+---------------+------------+-------+--------+
+| Chris  | Executive     | 1999-11-19 | 56350 |      3 |
+| Robie  | Salesman      | 2001-06-12 | 56350 |      2 |
+| Mathew | Sales Manager | 1995-01-15 | 59800 |      2 |
++--------+---------------+------------+-------+--------+
+3 rows in set (0.00 sec)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

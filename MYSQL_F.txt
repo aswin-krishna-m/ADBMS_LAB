@@ -1,0 +1,125 @@
+/////////F)\\\\\\\\\
+
+mysql> CREATE TABLE Emp (EmpNo INT PRIMARY KEY,EmpName VARCHAR(255),Job VARCHAR(255),Basic INT,DA INT,HRA INT,PF INT,GrossPay INT,NetPay INT);
+Query OK, 0 rows affected (0.75 sec)
+
+
+////////// a) \\\\\\\\\\\
+
+mysql> INSERT INTO Emp VALUES(1, 'John Doe', 'Manager', 15000.00, 4500.00, 6000.00, 2000.00, 0, 0),(2, 'Jane Smith', 'Developer', 12000.00, 3600.00, 4800.00, 1800.00, 0, 0),(3, 'Bob Johnson', 'Analyst', 10000.00, 3000.00, 4000.00, 1500.00, 0, 0),(4, 'Alice Brown', 'Manager', 16000.00, 4800.00, 6400.00, 2200.00, 0, 0),(5, 'Charlie Wilson', 'Developer', 13000.00, 3900.00, 5200.00, 1900.00, 0, 0);
+Query OK, 5 rows affected (0.09 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+/* DA HRA CALCULATION */
+mysql> UPDATE Emp SET DA = Basic * 0.30,HRA = Basic * 0.40;
+Query OK, 0 rows affected (0.02 sec)
+Rows matched: 5  Changed: 0  Warnings: 0
+
+/* Net and Gross Pay CALCULATION */
+mysql> UPDATE Emp SET GrossPay = Basic + DA + HRA,NetPay = Basic + DA + HRA - PF;
+Query OK, 5 rows affected (0.18 sec)
+Rows matched: 5  Changed: 5  Warnings: 0
+
+mysql> select * from Emp;
++-------+----------------+-----------+-------+------+------+------+----------+--------+
+| EmpNo | EmpName        | Job       | Basic | DA   | HRA  | PF   | GrossPay | NetPay |
++-------+----------------+-----------+-------+------+------+------+----------+--------+
+|     1 | John Doe       | Manager   | 15000 | 4500 | 6000 | 2000 |    25500 |  23500 |
+|     2 | Jane Smith     | Developer | 12000 | 3600 | 4800 | 1800 |    20400 |  18600 |
+|     3 | Bob Johnson    | Analyst   | 10000 | 3000 | 4000 | 1500 |    17000 |  15500 |
+|     4 | Alice Brown    | Manager   | 16000 | 4800 | 6400 | 2200 |    27200 |  25000 |
+|     5 | Charlie Wilson | Developer | 13000 | 3900 | 5200 | 1900 |    22100 |  20200 |
++-------+----------------+-----------+-------+------+------+------+----------+--------+
+5 rows in set (0.00 sec)
+
+
+////////// b) \\\\\\\\\\\
+
+mysql> SELECT EmpNo, EmpName, Job, Basic FROM (SELECT EmpNo, EmpName, Job, Basic, ROW_NUMBER() OVER (PARTITION BY Job ORDER BY Basic) AS row_num FROM Emp) AS ranked WHERE row_num = 1;
++-------+-------------+-----------+-------+
+| EmpNo | EmpName     | Job       | Basic |
++-------+-------------+-----------+-------+
+|     3 | Bob Johnson | Analyst   | 10000 |
+|     2 | Jane Smith  | Developer | 12000 |
+|     1 | John Doe    | Manager   | 15000 |
++-------+-------------+-----------+-------+
+3 rows in set (0.00 sec)
+
+////////// c) \\\\\\\\\\\
+
+mysql> UPDATE Emp SET NetPay = NetPay + 1200 WHERE NetPay < 10000;
+Query OK, 0 rows affected (0.00 sec)
+Rows matched: 0  Changed: 0  Warnings: 0
+
+mysql> select * from Emp;
++-------+----------------+-----------+-------+------+------+------+----------+--------+
+| EmpNo | EmpName        | Job       | Basic | DA   | HRA  | PF   | GrossPay | NetPay |
++-------+----------------+-----------+-------+------+------+------+----------+--------+
+|     1 | John Doe       | Manager   | 15000 | 4500 | 6000 | 2000 |    25500 |  23500 |
+|     2 | Jane Smith     | Developer | 12000 | 3600 | 4800 | 1800 |    20400 |  18600 |
+|     3 | Bob Johnson    | Analyst   | 10000 | 3000 | 4000 | 1500 |    17000 |  15500 |
+|     4 | Alice Brown    | Manager   | 16000 | 4800 | 6400 | 2200 |    27200 |  25000 |
+|     5 | Charlie Wilson | Developer | 13000 | 3900 | 5200 | 1900 |    22100 |  20200 |
++-------+----------------+-----------+-------+------+------+------+----------+--------+
+5 rows in set (0.00 sec)
+
+////////// d) \\\\\\\\\\\
+
+mysql> SELECT EmpNo, EmpName, GrossPay FROM Emp WHERE GrossPay BETWEEN 10000 AND 20000;
++-------+-------------+----------+
+| EmpNo | EmpName     | GrossPay |
++-------+-------------+----------+
+|     3 | Bob Johnson |    17000 |
++-------+-------------+----------+
+1 row in set (0.02 sec)
+
+
+////////// e) \\\\\\\\\\\\
+
+mysql> SELECT EmpNo, EmpName, Job, Basic, GrossPay FROM Emp WHERE GrossPay = (SELECT MAX(GrossPay) FROM Emp);
++-------+-------------+---------+-------+----------+
+| EmpNo | EmpName     | Job     | Basic | GrossPay |
++-------+-------------+---------+-------+----------+
+|     4 | Alice Brown | Manager | 16000 |    27200 |
++-------+-------------+---------+-------+----------+
+1 row in set (0.06 sec)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

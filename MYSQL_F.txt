@@ -6,7 +6,7 @@ Query OK, 0 rows affected (0.75 sec)
 
 ////////// a) \\\\\\\\\\\
 
-mysql> INSERT INTO Emp VALUES(1, 'John Doe', 'Manager', 15000.00, 4500.00, 6000.00, 2000.00, 0, 0),(2, 'Jane Smith', 'Developer', 12000.00, 3600.00, 4800.00, 1800.00, 0, 0),(3, 'Bob Johnson', 'Analyst', 10000.00, 3000.00, 4000.00, 1500.00, 0, 0),(4, 'Alice Brown', 'Manager', 16000.00, 4800.00, 6400.00, 2200.00, 0, 0),(5, 'Charlie Wilson', 'Developer', 13000.00, 3900.00, 5200.00, 1900.00, 0, 0);
+mysql> INSERT INTO Emp VALUES(1, 'John Doe', 'Manager', 15000, 4500, 6000, 2000, 0, 0),(2, 'Jane Smith', 'Developer', 12000, 3600, 4800, 1800, 0, 0),(3, 'Bob Johnson', 'Analyst', 10000, 3000, 4000, 1500, 0, 0),(4, 'Alice Brown', 'Manager', 16000, 4800, 6400, 2200, 0, 0),(5, 'Charlie Wilson', 'Developer', 13000, 3900, 5200, 1900, 0, 0);
 Query OK, 5 rows affected (0.09 sec)
 Records: 5  Duplicates: 0  Warnings: 0
 

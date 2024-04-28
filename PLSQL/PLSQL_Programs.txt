@@ -28,23 +28,6 @@ PL/SQL procedure successfully completed.
 
 >>>>>>>>3<<<<<<<<
 
-SQL> set serveroutput on
-SQL>  CREATE OR REPLACE PROCEDURE greetings
-  2    AS
-  3    BEGIN
-  4       dbms_output.put_line('Hello World!');
-  5    END;
-  6    /
-
-Procedure created.
-
-SQL> execute greetings
-Hello World!
-
-PL/SQL procedure successfully completed.
-
->>>>>>>>4<<<<<<<<
-
 SQL> create table Employees(eid int,fname varchar(30),salary int);
 
 Table created.
@@ -75,7 +58,7 @@ Salary:30000
 
 PL/SQL procedure successfully completed.
 
->>>>>>>>5<<<<<<<<
+>>>>>>>>4<<<<<<<<
 
 SQL>  declare
   2          name Employees.fname%TYPE;
@@ -92,7 +75,7 @@ Salary:30000
 
 PL/SQL procedure successfully completed.
 
->>>>>>>>6<<<<<<<<
+>>>>>>>>5<<<<<<<<
 
 SQL> set serveroutput on;
 SQL>  declare
@@ -113,7 +96,7 @@ factorial of 6 is 720
 
 PL/SQL procedure successfully completed.
 
->>>>>>>>7<<<<<<<<
+>>>>>>>>6<<<<<<<<
 
 SQL> declare
   2    n number;
@@ -136,7 +119,7 @@ factorial=120
 
 PL/SQL procedure successfully completed.
 
->>>>>>>>8<<<<<<<<
+>>>>>>>>7<<<<<<<<
 
 SQL> declare
   2
@@ -154,7 +137,7 @@ Sum is 30
 
 PL/SQL procedure successfully completed.
 
->>>>>>>>9<<<<<<<<
+>>>>>>>>8<<<<<<<<
 
 SQL> Declare
   2     Var1 integer;
@@ -177,21 +160,7 @@ new   7:    Var2:=4;
 
 PL/SQL procedure successfully completed.
 
->>>>>>>>10<<<<<<<<
-
-SQL> begin
-  2     dbms_output.put_line('This is my first PL/SQL Program');
-  3     dbms_output.put_line('PL/SQL is a procedural Language');
-  4     dbms_output.put_line('I like PL/SQL');
-  5    end;
-  6    /
-This is my first PL/SQL Program
-PL/SQL is a procedural Language
-I like PL/SQL
-
-PL/SQL procedure successfully completed.
-
->>>>>>>>11<<<<<<<<
+>>>>>>>>9<<<<<<<<
 
 SQL> declare
   2    num1 number;
@@ -217,7 +186,7 @@ The division of  20  and  15  is  1.33333333333333333333333333333333333333
 
 PL/SQL procedure successfully completed.
 
->>>>>>>>12<<<<<<<<
+>>>>>>>>10<<<<<<<<
 
 SQL> declare
   2    num1 number;
@@ -249,7 +218,7 @@ The division of  4  and  6  is  .6666666666666666666666666666666666666667
 
 PL/SQL procedure successfully completed.
 
->>>>>>>>13<<<<<<<<
+>>>>>>>>11<<<<<<<<
 
 SQL> declare
   2  x number;
@@ -269,7 +238,7 @@ The number 6 is even
 
 PL/SQL procedure successfully completed.
 
->>>>>>>>14<<<<<<<<
+>>>>>>>>12<<<<<<<<
 
 SQL> declare
   2   x number;
@@ -303,7 +272,7 @@ y is largest
 
 PL/SQL procedure successfully completed.
 
->>>>>>>>15<<<<<<<<
+>>>>>>>>13<<<<<<<<
 
 SQL> declare
   2     x number;
@@ -322,52 +291,39 @@ SQL> declare
  15    end if;
  16     end;
  17     /
-Enter value for number1: 2
+Enter value for number1: 7
 old   6:    x:=&number1;
-new   6:    x:=2;
+new   6:    x:=7;
 Enter value for number2: 5
 old   7:    y:=&number2;
 new   7:    y:=5;
-Enter value for number3: 9
+Enter value for number3: 3
 old   8:    z:=&number3;
-new   8:    z:=9;
-z is largest
+new   8:    z:=3;
+x is largest
 
 PL/SQL procedure successfully completed.
 
->>>>>>>>16<<<<<<<<
+						PROCEDURE
+						=========
+
+>>>>>>>>14<<<<<<<<
 
 SQL> set serveroutput on
-SQL>  CREATE OR REPLACE PROCEDURE greetings
+SQL>  CREATE OR REPLACE PROCEDURE welcome
   2    AS
   3    BEGIN
-  4       dbms_output.put_line('Hello World!');
+  4       dbms_output.put_line('Hai!');
   5    END;
   6   /
-
 Procedure created.
 
-SQL>  execute greetings
-Hello World!
+SQL>  execute welcome
+Hai!
 
 PL/SQL procedure successfully completed.
 
->>>>>>>>17<<<<<<<<
-
-SQL> CREATE OR REPLACE PROCEDURE test1 IS
-  2  BEGIN
-  3  dbms_output.put_line('test sucess');
-  4  END;
-  5  /
-
-Procedure created.
-
-SQL> execute test1
-test sucess
-
-PL/SQL procedure successfully completed.
-
->>>>>>>>18<<<<<<<<
+>>>>>>>>15<<<<<<<<
 
 SQL> create table dept(eid int,ename varchar(50),psal int,ploc varchar(40));
 
@@ -384,36 +340,23 @@ INSERT INTO dept Values(depid,depname,depsal,deploc);
 dbms_output.Put_line('dpmt added');
 end;
 /
-
 Procedure created.
-
->>>>>>>>19<<<<<<<<
 
 SQL> execute addemp(1,'Athira',2000,'kottayam');
 dpmt added
 
 PL/SQL procedure successfully completed.
 
-SQL> execute addemp(2,'Aswin',3000,'kannur');
-dpmt added
-
 PL/SQL procedure successfully completed.
 
->>>>>>>>20<<<<<<<<
+>>>>>>>>16<<<<<<<<
 
-SQL> BEGIN
-  2       greetings;
-  3    END;
-  4   /
-Hello World!
-
-PL/SQL procedure successfully completed.
-
-SQL> DROP PROCEDURE greetings;
+SQL> DROP PROCEDURE welcome;
 
 Procedure dropped.
 
->>>>>>>>21<<<<<<<<
+
+>>>>>>>>17<<<<<<<<
 
 SQL> DECLARE
   2      a number;
@@ -438,7 +381,7 @@ Minimum of (31,56): 31
 
 PL/SQL procedure successfully completed.
 
->>>>>>>>22<<<<<<<<
+>>>>>>>>18<<<<<<<<
 
 SQL> DECLARE
   2       a number;
@@ -456,13 +399,437 @@ Square of (21): 441
 
 PL/SQL procedure successfully completed.
 
+>>>>>>>>19<<<<<<<<
+
+SQL> CREATE OR REPLACE PROCEDURE sumcalc AS
+  2  num1 INT := 10;
+  3  num2 INT := 20;
+  4  num3 INT := 30;
+  5  total INT;
+  6  BEGIN
+  7  total := num1 + num2 + num3;
+  8  DBMS_OUTPUT.PUT_LINE('Sum result: ' || total);
+  9  END;
+ 10  /
+Procedure created.
+
+SQL>  execute sumcalc;
+Sum result: 60
+
+PL/SQL procedure successfully completed.
+
+
+>>>>>>>>20<<<<<<<<
+
+SQL> create table student (name varchar(10),marks int);
+
+Table created.
+
+SQL> insert into student values ('sam',98),('ram',79),('tam',89);
+
+3 rows created.
+
+SQL> set serveroutput on;
+SQL> create or replace procedure topstud as topname student.name%type;
+  2  begin
+  3  select name into topname from student where marks=(select max(marks) from student);
+  4  dbms_output.Put_line(topname);
+  5  end;
+  6  /
+Procedure created.
+
+SQL> execute topstud;
+
+sam
+
+PL/SQL procedure successfully completed.
+
+>>>>>>>>21<<<<<<<<
+
+SQL> DECLARE
+  2  num number;
+  3  factorial number;
+  4  FUNCTION fact(x number)
+  5  RETURN number
+  6  IS
+  7  f number;
+  8  BEGIN
+  9  IF x=0 THEN
+ 10  f := 1;
+ 11  ELSE
+ 12  f := x * fact(x-1);
+ 13  END IF;
+ 14  RETURN f;
+ 15  END;
+ 16  BEGIN
+ 17  num:= 6;
+ 18  factorial := fact(num);
+ 19  dbms_output.put_line(' Factorial '|| num || ' is ' || factorial);
+ 20  END;
+ 21  /
+factorial 6 is 720
+
+PL/SQL procedure successfully completed.
 
 
 
 
 
 
+						FUNCTIONS
+						=========
 
 
+>>>>>>>>22<<<<<<<<
+
+SQL> set serveroutput on
+SQL> create function sqarea(len int)return int is
+  2  area int(5,3);
+  3      begin
+  4      area:=(len*len);
+  5      return area;
+  6      end;
+  7    /
+
+Function created.
+SQL> begin
+  2  dbms_output.put_line('area='||sqarea(4));
+  3  end;
+  4  /
+area=16
+
+PL/SQL procedure successfully completed.
+
+>>>>>>>>23<<<<<<<<
+
+SQL> create or replace function adder(n1 in number, n2 in number)
+  2       return number
+  3        is
+  4        n3 number(8);
+  5        begin
+  6        n3 :=n1+n2;
+  7        return n3;
+  8        end;
+  9        /
+
+Function created.
+
+SQL>  DECLARE
+  2         n3 number(2);
+  3      BEGIN
+  4         n3 := adder(11,22);
+  5         dbms_output.put_line('Addition is: ' || n3);
+  6      END;
+  7      /
+Addition is: 33
+
+PL/SQL procedure successfully completed
+
+>>>>>>>>24<<<<<<<<
+
+SQL> set serveroutput on
+SQL>  DECLARE
+  2        a number;
+  3        b number;
+  4        c number;
+  5     FUNCTION findMax(x IN number, y IN number)
+  6     RETURN number
+  7     IS
+  8         z number;
+  9     BEGIN
+ 10        IF x > y THEN
+ 11           z:= x;
+ 12        ELSE
+ 13           Z:= y;
+ 14        END IF;
+ 15         RETURN z;
+ 16     END;
+ 17     BEGIN
+ 18        a:= 23;
+ 19        b:= 45;
+ 20         c := findMax(a, b);
+ 21        dbms_output.put_line(' Maximum of (23,45): ' || c);
+ 22     END;
+ 23     /
+Maximum of (23,45): 45
+
+PL/SQL procedure successfully completed.
+
+>>>>>>>>25<<<<<<<<
+
+SQL> create table customers(id int,name varchar(20),dpmt varchar(20),salary int);
+
+Table created.
+
+SQL> insert into customers values(1,'sam','cs',2000);
+
+1 row created.
+
+SQL>  insert into customers values(2,'tam','it',3000);
+
+1 row created.
+
+SQL> insert into customers values(3,'ram','ec',2500);
+
+1 row created.
+
+SQL>  insert into customers values(4,'kam','mca',5000);
+
+1 row created.
+
+SQL> select * from customers;
+
+        ID NAME                 DPMT                     SALARY
+---------- -------------------- -------------------- ----------
+         1 sam                  cs                         2000
+         2 tam                  it                         3000
+         3 ram                  ec                         2500
+         4 kam                  mca                        5000
+
+SQL>
+SQL> CREATE OR REPLACE FUNCTION totalCustomers
+  2          RETURN number IS
+  3             total number(2) := 0;
+  4          BEGIN
+  5             SELECT count(*) into total
+  6             FROM customers;
+  7              RETURN total;
+  8         END;
+  9        /
+
+Function created.
+
+SQL>
+SQL>   DECLARE
+  2            c number(2);
+  3          BEGIN
+  4             c := totalCustomers();
+  5             dbms_output.put_line('Total no. of Customers: ' || c);
+  6          END;
+  7          /
+Total no. of Customers: 4
+
+PL/SQL procedure successfully completed.
+
+
+
+
+						CURSOR
+						======
+
+
+>>>>>>>>26<<<<<<<<
+
+SQL> DECLARE
+  2       total_rows number(2);
+  3    BEGIN
+  4       UPDATE  customers
+  5       SET salary = salary + 5000;
+  6       IF sql%notfound THEN
+  7          dbms_output.put_line('no customers updated');
+  8       ELSIF sql%found THEN
+  9          total_rows := sql%rowcount;
+ 10          dbms_output.put_line( total_rows || ' customers updated ');
+ 11       END IF;
+ 12    END;
+ 13     /
+4 customers updated
+
+PL/SQL procedure successfully completed.
+
+SQL> select * from customers;
+
+        ID NAME                 DPMT                     SALARY
+---------- -------------------- -------------------- ----------
+         1 sam                  cs                         7000
+         2 tam                  it                         8000
+         3 ram                  ec                         7500
+         4 kam                  mca                       10000
+
+>>>>>>>>27<<<<<<<<
+
+SQL> DECLARE
+  2        c_id customers.id%type;
+  3        c_name customers.name%type;
+  4        c_salary customers.salary%type;
+  5       CURSOR c_customers is
+  6           SELECT id, name, salary FROM customers;
+  7    BEGIN
+  8        OPEN c_customers;
+  9        LOOP
+ 10          FETCH c_customers into c_id, c_name, c_salary;
+ 11          EXIT WHEN c_customers%notfound;
+ 12           dbms_output.put_line(c_id || ' ' || c_name || ' ' || c_salary);
+ 13       END LOOP;
+ 14    CLOSE c_customers;
+ 15    END;
+ 16    /
+
+1 sam 7000
+2 tam 8000
+3 ram 7500
+4 kam 10000
+
+PL/SQL procedure successfully completed.
+
+
+
+
+						TRIGGER
+						=======
+
+
+>>>>>>>>28<<<<<<<<
+
+SQL> set serveroutput on
+SQL> CREATE OR REPLACE TRIGGER salaryupdate
+  2    BEFORE DELETE OR INSERT OR UPDATE ON customers
+  3    FOR EACH ROW
+  4    WHEN (NEW.ID > 0)
+  5    DECLARE
+  6       sal_diff number;
+  7   BEGIN
+  8       sal_diff := :NEW.salary  - :OLD.salary;
+  9       dbms_output.put_line('Old salary: ' || :OLD.salary);
+ 10       dbms_output.put_line('New salary: ' || :NEW.salary);
+ 11       dbms_output.put_line('Salary difference: ' || sal_diff);
+ 12   END;
+ 13     /
+
+Trigger created.
+
+SQL> DECLARE
+  2       total_rows number(2);
+  3    BEGIN
+  4         UPDATE  customers
+  5         SET salary = salary + 5000;
+  6         IF sql%notfound THEN
+  7            dbms_output.put_line('no customers updated');
+  8         ELSIF sql%found THEN
+  9            total_rows := sql%rowcount;
+ 10           dbms_output.put_line( total_rows || ' customers updated ');
+ 11        END IF;
+ 12     END;
+ 13     /
+
+
+Old salary: 2000
+New salary: 7000
+Salary difference: 5000
+Old salary: 3000
+New salary: 8000
+Salary difference: 5000
+Old salary: 2500
+New salary: 7500
+Salary difference: 5000
+Old salary: 5000
+New salary: 10000
+Salary difference: 5000
+4 customers updated
+
+PL/SQL procedure successfully completed.
+
+>>>>>>>>29<<<<<<<<
+
+SQL> create table employee(employee_no int primary key,name varchar(10),salary int);
+
+Table created.
+
+SQL> insert into employee values(1,'Amal',40000);
+
+1 row created.
+
+SQL> insert into employee values(2,'Athullaya',50000);
+
+1 row created.
+
+SQL> insert into employee values(3,'Nandhu',60000);
+
+1 row created.
+
+SQL> insert into employee values(4,'ponnan',70000);
+
+1 row created.
+
+SQL> set serveroutput on
+SQL> CREATE OR REPLACE TRIGGER Checksalary
+  2     BEFORE
+  3     INSERT OR UPDATE ON employee
+  4    FOR EACH ROW
+  5     BEGIN
+  6     IF :new.salary>3000 THEN
+  7     raise_application_error(-20001, 'salary should not be greater than 2000');
+  8     END IF;
+  9     END;
+ 10      /
+
+Trigger created.
+
+SQL> update employee set salary=4000 where employee_no=2;
+update employee set salary=4000 where employee_no=2
+       *
+ERROR at line 1:
+ORA-20001: salary should not be greater than 2000
+ORA-06512: at "SYSTEM.CHECKSALARY", line 3
+ORA-04088: error during execution of trigger 'SYSTEM.CHECKSALARY'
+
+
+SQL> update employee set salary=4000 where employee_no=2
+  2
+SQL> update employee set salary=2600 where employee_no=2;
+
+1 row updated.
+
+SQL> select * from employee;
+
+EMPLOYEE_NO NAME           SALARY
+----------- ---------- ----------
+          1 Amal            40000
+          2 Athullaya        2600
+          3 Nandhu          60000
+          4 ponnan          70000
+
+>>>>>>>>30<<<<<<<<
+
+SQL>  create table stud(sid int,sname varchar(20),sdpmt varchar(20),marks int);
+
+Table created.
+
+SQL>   insert into stud values(1,'sam','cse',20);
+
+1 row created.
+
+SQL>  insert into stud values(2,'tam','it',30);
+
+1 row created.
+
+SQL> select * from stud;
+
+       SID SNAME                SDPMT                     MARKS
+---------- -------------------- -------------------- ----------
+         1 sam                  cse                          20
+         2 tam                  it                           30
+
+SQL> create or replace trigger studtrig after insert on stud
+  2      begin
+  3      dbms_output.put_line('inserted');
+  4      end;
+  5      /
+
+Trigger created.
+
+SQL> set serveroutput on
+SQL> insert into stud values(3,'wam','ec',39);
+inserted
+
+1 row created.
+
+SQL> select * from stud;
+
+       SID SNAME                SDPMT                     MARKS
+---------- -------------------- -------------------- ----------
+         1 sam                  cse                          20
+         2 tam                  it                           30
+         3 wam                  ec                           39
 
 

@@ -23,7 +23,7 @@
           </ul>  
           {% if loggedIn %}
           <form class="d-flex">
-            <a class="nav-link active" aria-current="page" href="/logout" onclick="return confirm('Logout?');"><i class="bi bi-box-arrow-right"></i></a>
+            <a class="nav-link active" aria-current="page" href="/logout" data-toggle="tooltip" title="Logout" onclick="return confirm('Logout?');"><i class="bi bi-box-arrow-right"></i></a>
           </form>
           {% endif %}
         </div>

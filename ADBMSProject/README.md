@@ -7,7 +7,6 @@ This is a simple Todo List web application built using Flask and MongoDB. It all
 - User Authentication: Users can register, login, and logout.
 - Task Management: Users can add new tasks, update existing tasks, delete tasks, and mark tasks as completed.
 - Real-time Task Display: Tasks are displayed with their completion status and the time left for completion.
-- Responsive Design: The web application is responsive and works well on different screen sizes.
 
 ## Technologies Used
 
@@ -16,6 +15,28 @@ This is a simple Todo List web application built using Flask and MongoDB. It all
 - HTML/CSS: Frontend styling and structure.
 - JavaScript: For client-side interactivity and real-time updates.
 - Bootstrap Dependencies and Icons.
+
+## Screenshots
+
+### Home Page
+![Home Page](screenshots/homepage.png)
+
+### Task Creation
+![Task Creation](screenshots/add.png)
+
+### Task Update
+![Task Update](screenshots/update.png)
+
+### Task Reminder
+![Task Reminder](screenshots/reminder.png)
+
+### Task Completed
+![Task Completed](screenshots/completed.png)
+
+### Signup, Login & Logout
+![Signup](screenshots/signup.png)
+![Login](screenshots/login.png)
+![Logout](screenshots/logout.png)
 
 ## Installation
 

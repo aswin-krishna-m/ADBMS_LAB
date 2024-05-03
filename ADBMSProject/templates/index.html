@@ -8,8 +8,19 @@
     <style>.strike{text-decoration: line-through;}</style>
 </head>
 <body onload="startTime()">
+    {% with messages = get_flashed_messages()%}
+    {% if messages %}
+        {% for message in messages%}
+            <div class="alert alert-info alert-dismissible fade show w-50 mx-auto" style="position: absolute;z-index: 999; left: 25%;" role="alert">
+                <span>{{message}}</span>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {%endfor%}
+    {%endif%}
+    {%endwith%}
+
     {% for tsk in tasks %}{% if tsk.late %}
-    <div class="alert alert-danger alert-dismissible fade show w-50 mx-auto" style="position: absolute;z-index: 999; left: 10%;" role="alert">
+    <div class="alert alert-danger alert-dismissible fade show w-50 mx-auto" style="position: absolute;z-index: 999; left: 25%;" role="alert">
        <strong class="h4">Reminder : </strong> <span class="h5"> {{tsk.name}} </span> at {{tsk.time_to_complete}} is pending!!
        <form action="/status/{{ tsk._id }}" class="text-center mb-2 mt-4" method="post"><button type="submit" class="btn btn-secondary">complete now</button></form>
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -92,7 +103,7 @@
         </div>
     {% endif %}
     {% else %}
-        <div class="container py-5 " style="border:solid 1px; border-radius: 20px; width: 30%;">
+        <div class="container py-5 w-50" style="border:solid 1px; border-radius: 20px;">
             <ul class="nav nav-pills nav-justified" id="pills-tab">
                 <li class="nav-item">
                     <button class="nav-link active" id="login-tab" data-bs-toggle="pill" data-bs-target="#login" type="button" onclick="loginForm()">Login</button>

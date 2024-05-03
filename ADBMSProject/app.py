@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for,session
+from flask import Flask, render_template, request, redirect, url_for,session,flash
 from pymongo import MongoClient
 from bson.objectid import ObjectId
 from datetime import datetime
@@ -37,7 +37,6 @@ def delete_task(task_id):
 
 @app.route('/')
 def index():
-    print(getTime())
     if 'user_id' in session:
         tasks = get_tasks(session['user_id'])
         for i in tasks:
@@ -95,12 +94,18 @@ def login():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
-        user_data = users_collection.find_one({'username': username})
-        if user_data and user_data['password']==password:
-            session['user_id']= str(user_data['_id'])
-            print(user_data['_id'])
-            return redirect(url_for('index'))
-        else:
+        try:
+            user_data = users_collection.find_one({'username': username})
+            print(user_data)
+            if user_data['password']==password:
+                session['user_id']= str(user_data['_id'])
+                print(user_data['_id'])
+                return redirect(url_for('index'))
+            else:
+                flash('Password Error')
+                return redirect(url_for('index'))  
+        except Exception:
+            flash('Username not found')
             return redirect(url_for('index'))
 
 @app.route('/register', methods=['GET', 'POST'])
@@ -111,7 +116,11 @@ def register():
         user_data = {'username': username, 'password': password}
         if not users_collection.find_one({'username': username}):
             users_collection.insert_one(user_data)
-        return redirect(url_for('index'))
+            flash('Signup Successfull, Please Login')
+            return redirect(url_for('index'))
+        else:
+            flash('Username already exists! try another!!')
+            return redirect(url_for('index'))
 
 @app.route('/logout')
 def logout():
